@@ -40,12 +40,12 @@ var Veda;
             };
             PatternUtil.Get = function (words, I) {
                 if (I < 0) {
-                    return "";
+                    return PatternUtil.Missing;
                 }
                 if (I < words.length) {
                     return words[I];
                 }
-                return "";
+                return PatternUtil.Missing;
             };
             PatternUtil.Filter = function (words) {
                 var _words = [];
@@ -57,6 +57,7 @@ var Veda;
                 }
                 return _words;
             };
+            PatternUtil.Missing = "_";
             PatternUtil.Space = " ";
             PatternUtil.Seperator = " ~ ";
             PatternUtil.NewLine = "\n";
@@ -103,8 +104,8 @@ var Veda;
                 }
                 for (var I = 0; I <= N - 1; I++) {
                     //I+1 I+2 / I+2 I+1 / I+1 I+2  : One Index
-                    sb = sb + (PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Space +
-                        PatternUtil.Get(words, I + 1) + PatternUtil.Space + PatternUtil.Get(words, I) + PatternUtil.Space +
+                    sb = sb + (PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Seperator +
+                        PatternUtil.Get(words, I + 1) + PatternUtil.Space + PatternUtil.Get(words, I) + PatternUtil.Seperator +
                         PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Seperator);
                     sb = sb + (PatternUtil.NewLine);
                 }
@@ -279,7 +280,13 @@ var Veda;
             function Worker() {
                 this.registerEvents();
                 this.list = [new Jata(), new Mala(), new Sikha(), new Rekha(), new Dhvaja(), new Dhanda(), new Ratha(), new Ghana()];
-                this.randomList = ["శ్రీ రామ రామ రామేతి రమే రామే మనోరమే సహస్ర నామ తత్ తుల్యం రామ నామ వరాననే", "శ్రీ హేవళంబి నామ నూతన సంవత్సర శుభ అభినందనం", "ī̱śā vā̱sya̍m i̱daṁ sarva̱ṃ yat kiñca jaga̍tyā̱ṃ jaga̍t", "ईशा वास्यं इदं सर्वं यत्किंच जगत्यां जगत्", "ఈశా వశ్యం ఇదం సర్వం  యత్ జగత్యం జగత్"];
+                this.randomList = [
+                    "శ్రీ రామ రామ రామేతి రమే రామే మనోరమే సహస్ర నామ తత్ తుల్యం రామ నామ వరాననే",
+                    "1 2 3 4 5 6 7 8 9",
+                    "శ్రీ హేవళంబి నామ నూతన సంవత్సర శుభ అభినందనం",
+                    "ī̱śā vā̱sya̍m i̱daṁ sarva̱ṃ yat kiñca jaga̍tyā̱ṃ jaga̍t",
+                    "ईशा वास्यं इदं सर्वं यत्किंच जगत्यां जगत्",
+                    "ఈశా వశ్యం ఇదం సర్వం  యత్ జగత్యం జగత్"];
                 var that = this;
                 Util.registerEvent(window, "unload", function (e) { that.dispose; });
                 this.random(null);
