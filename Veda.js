@@ -47,6 +47,16 @@ var Veda;
                 }
                 return "";
             };
+            PatternUtil.Filter = function (words) {
+                var _words = [];
+                for (var index in words) {
+                    if (words[index].trim() == "") {
+                        continue;
+                    }
+                    _words.push(words[index]);
+                }
+                return _words;
+            };
             PatternUtil.Space = " ";
             PatternUtil.Seperator = " ~ ";
             PatternUtil.NewLine = "\n";
@@ -59,7 +69,8 @@ var Veda;
                 this.Name = "jaṭā జట";
                 this.MinLength = 2;
             }
-            Jata.prototype.GetStream = function (words) {
+            Jata.prototype.GetStream = function (_words) {
+                var words = PatternUtil.Filter(_words);
                 var sb = "";
                 var N = words.length;
                 if (N < this.MinLength) {
@@ -83,7 +94,8 @@ var Veda;
                 this.Name = "mālā మాల";
                 this.MinLength = 2;
             }
-            Mala.prototype.GetStream = function (words) {
+            Mala.prototype.GetStream = function (_words) {
+                var words = PatternUtil.Filter(_words);
                 var sb = "";
                 var N = words.length;
                 if (N < this.MinLength) {
@@ -107,7 +119,8 @@ var Veda;
                 this.Name = "śikhā శిఖ";
                 this.MinLength = 3;
             }
-            Sikha.prototype.GetStream = function (words) {
+            Sikha.prototype.GetStream = function (_words) {
+                var words = PatternUtil.Filter(_words);
                 var sb = "";
                 var N = words.length;
                 if (N < this.MinLength) {
@@ -131,7 +144,8 @@ var Veda;
                 this.Name = "rekhā రేఖ";
                 this.MinLength = 4;
             }
-            Rekha.prototype.GetStream = function (words) {
+            Rekha.prototype.GetStream = function (_words) {
+                var words = PatternUtil.Filter(_words);
                 var sb = "";
                 var N = words.length;
                 if (N < this.MinLength) {
@@ -155,7 +169,8 @@ var Veda;
                 this.Name = "dhvaja ధ్వజ";
                 this.MinLength = 4;
             }
-            Dhvaja.prototype.GetStream = function (words) {
+            Dhvaja.prototype.GetStream = function (_words) {
+                var words = PatternUtil.Filter(_words);
                 var sb = "";
                 var N = words.length;
                 if (N < this.MinLength) {
@@ -178,13 +193,14 @@ var Veda;
                 this.Name = "daṇḍa దండ";
                 this.MinLength = 4;
             }
-            Dhanda.prototype.GetStream = function (words) {
+            Dhanda.prototype.GetStream = function (_words) {
+                var words = PatternUtil.Filter(_words);
                 var sb = "";
                 var N = words.length;
                 if (N < this.MinLength) {
                     return "";
                 }
-                for (var I = 1; I <= N; I++) {
+                for (var I = 0; I <= N - 1; I++) {
                     //I+1 I+2 / I+2 I+1 / I+1 I+2 / I+2 I+3 /  I+3 I+2 I+1 / I+1 I+2 / I+2 I+3 / I+3 I+4 / I+4 I+3 I+2 I+1 / I+1 I+2 : One Index
                     sb = sb + (PatternUtil.Get(words, I + 1 - 1) + PatternUtil.Space + PatternUtil.Get(words, I + 2 - 1) + PatternUtil.Seperator +
                         PatternUtil.Get(words, I + 2 - 1) + PatternUtil.Space + PatternUtil.Get(words, I + 1 - 1) + PatternUtil.Seperator +
@@ -194,7 +210,7 @@ var Veda;
                         PatternUtil.Get(words, I + 1 - 1) + PatternUtil.Space + PatternUtil.Get(words, I + 2 - 1) + PatternUtil.Seperator +
                         PatternUtil.Get(words, I + 2 - 1) + PatternUtil.Space + PatternUtil.Get(words, I + 3 - 1) + PatternUtil.Seperator +
                         PatternUtil.Get(words, I + 3 - 1) + PatternUtil.Space + PatternUtil.Get(words, I + 4 - 1) + PatternUtil.Seperator +
-                        PatternUtil.Get(words, I + 4 - 1) + PatternUtil.Space + PatternUtil.Get(words, I + 3 - 1) + PatternUtil.Get(words, I + 2 - 1) + PatternUtil.Space + PatternUtil.Get(words, I + 1 - 1) + PatternUtil.Seperator +
+                        PatternUtil.Get(words, I + 4 - 1) + PatternUtil.Space + PatternUtil.Get(words, I + 3 - 1) + PatternUtil.Space + PatternUtil.Get(words, I + 2 - 1) + PatternUtil.Space + PatternUtil.Get(words, I + 1 - 1) + PatternUtil.Seperator +
                         PatternUtil.Get(words, I + 1 - 1) + PatternUtil.Space + PatternUtil.Get(words, I + 2 - 1) + PatternUtil.Seperator);
                     sb = sb + (PatternUtil.NewLine);
                 }
@@ -209,7 +225,8 @@ var Veda;
                 this.Name = "ratha రధ";
                 this.MinLength = 5;
             }
-            Ratha.prototype.GetStream = function (words) {
+            Ratha.prototype.GetStream = function (_words) {
+                var words = PatternUtil.Filter(_words);
                 var sb = "";
                 var N = words.length;
                 if (N < this.MinLength) {
@@ -241,13 +258,14 @@ var Veda;
                 this.Name = "ghana ఘణ";
                 this.MinLength = 3;
             }
-            Ghana.prototype.GetStream = function (words) {
+            Ghana.prototype.GetStream = function (_words) {
+                var words = PatternUtil.Filter(_words);
                 var sb = "";
                 var N = words.length;
                 if (N < this.MinLength) {
                     return "";
                 }
-                for (var I = 1; I <= N; I++) {
+                for (var I = 0; I <= N - 1; I++) {
                     //I+1 I+2 I+2 I+1 I+1 I+2 I+3 I+3 I+2 I+1 I+1 I+2 I+3 : One Index
                     sb = sb + (PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Space + PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Space + PatternUtil.Get(words, I + 2) + PatternUtil.Space + PatternUtil.Get(words, I + 2) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Space + PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Space + PatternUtil.Get(words, I + 2) + PatternUtil.Seperator);
                     sb = sb + (PatternUtil.NewLine);
@@ -261,7 +279,7 @@ var Veda;
             function Worker() {
                 this.registerEvents();
                 this.list = [new Jata(), new Mala(), new Sikha(), new Rekha(), new Dhvaja(), new Dhanda(), new Ratha(), new Ghana()];
-                this.randomList = ["శ్రీ హేవళంబి నామ నూతన సంవత్సర శుభ అభినందనం", "ī̱śā vā̱sya̍m i̱daṁ sarva̱ṃ yat kiñca jaga̍tyā̱ṃ jaga̍t", "ईशा वास्यं इदं सर्वं यत्किंच जगत्यां जगत्", "ఈశా వశ్యం ఇదం సర్వం  యత్ జగత్యం జగత్"];
+                this.randomList = ["శ్రీ రామ రామ రామేతి రమే రామే మనోరమే సహస్ర నామ తత్ తుల్యం రామ నామ వరాననే", "శ్రీ హేవళంబి నామ నూతన సంవత్సర శుభ అభినందనం", "ī̱śā vā̱sya̍m i̱daṁ sarva̱ṃ yat kiñca jaga̍tyā̱ṃ jaga̍t", "ईशा वास्यं इदं सर्वं यत्किंच जगत्यां जगत्", "ఈశా వశ్యం ఇదం సర్వం  యత్ జగత్యం జగత్"];
                 var that = this;
                 Util.registerEvent(window, "unload", function (e) { that.dispose; });
                 this.random(null);
@@ -299,7 +317,7 @@ var Veda;
                 table.innerHTML = html;
             };
             Worker.prototype.getPatterns = function (input) {
-                var words = input.split(' ');
+                var words = PatternUtil.Filter(input.split(' '));
                 var sb = [];
                 for (var index in this.list) {
                     var pattern = this.list[index];
@@ -319,4 +337,3 @@ var Veda;
     })(Chanting = Veda.Chanting || (Veda.Chanting = {}));
 })(Veda || (Veda = {}));
 new Veda.Chanting.Worker();
-//# sourceMappingURL=Veda.js.map
