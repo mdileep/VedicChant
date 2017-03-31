@@ -40,3 +40,11 @@
 - Mala should use Seperator instead of Space
 #### Known Issues
 - No new known issues
+
+### Version 0.70 Beta : 30-Mar-2017 08:36 PM EST
+#### Features
+- Added 3 Color Map Styles
+#### Bug Fixes
+- None
+#### Known Issues
+- No new known issues
