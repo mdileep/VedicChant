@@ -13,7 +13,7 @@ namespace Veda.Chanting {
         GetStream(words: string[]): string;
     }
     export class PatternUtil {
-
+        public static Missing: string = "_";
         public static Space: string = " ";
         public static Seperator: string = " ~ ";
         public static NewLine: string = "\n";
@@ -48,12 +48,12 @@ namespace Veda.Chanting {
 
         public static Get(words: string[], I: number): string {
             if (I < 0) {
-                return "";
+                return PatternUtil.Missing;
             }
             if (I < words.length) {
                 return words[I];
             }
-            return "";
+            return PatternUtil.Missing;
         }
 
         public static Filter(words: string[]): string[] {
@@ -102,8 +102,8 @@ namespace Veda.Chanting {
             }
             for (var I = 0; I <= N - 1; I++) {
                 //I+1 I+2 / I+2 I+1 / I+1 I+2  : One Index
-                sb = sb + (PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Space +
-                    PatternUtil.Get(words, I + 1) + PatternUtil.Space + PatternUtil.Get(words, I) + PatternUtil.Space +
+                sb = sb + (PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Seperator +
+                    PatternUtil.Get(words, I + 1) + PatternUtil.Space + PatternUtil.Get(words, I) + PatternUtil.Seperator +
                     PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Seperator);
                 sb = sb + (PatternUtil.NewLine);
             }
@@ -252,19 +252,40 @@ namespace Veda.Chanting {
     }
 
     export class Worker {
+        numbers: string = "1 2 3 4 5 6 7 8 9";
 
-        constructor() {
+        constructor(config: VedaConfig) {
+            debugger;
+            this.init(config);
+        }
 
-            this.registerEvents();
+        private init(config: VedaConfig) {
 
             this.list = [new Jata(), new Mala(), new Sikha(), new Rekha(), new Dhvaja(), new Dhanda(), new Ratha(), new Ghana()];
-            this.randomList = ["శ్రీ రామ రామ రామేతి రమే రామే మనోరమే సహస్ర నామ తత్ తుల్యం రామ నామ వరాననే", "శ్రీ హేవళంబి నామ నూతన సంవత్సర శుభ అభినందనం", "ī̱śā vā̱sya̍m i̱daṁ sarva̱ṃ yat kiñca jaga̍tyā̱ṃ jaga̍t", "ईशा वास्यं इदं सर्वं यत्किंच जगत्यां जगत्", "ఈశా వశ్యం ఇదం సర్వం  యత్ జగత్యం జగత్"];
+            this.randomList = [];
+            this.randomList.push(this.numbers);
 
-            var that = this;
-            Util.registerEvent(window, "unload", function (e) { that.dispose });
+            if (config != null) {
+                this.loadSamples(config.samples);
+            }
 
-            this.random(null);
+            this.random(0);// Don't show "1 2.." on Load
             this.go(null);
+
+            this.registerEvents();
+        }
+
+        private loadSamples(samples: string[]): void {
+            if (samples == null) {
+                return;
+            }
+
+            for (var index in samples) {
+                if (samples[index] == null || samples[index].length == 0) {
+                    continue;
+                }
+                this.randomList.push(samples[index]);
+            }
         }
 
         randomList: string[];
@@ -286,13 +307,25 @@ namespace Veda.Chanting {
         private registerEvents() {
             var that = this;
             this.goHandler = function (e) { that.go(e); };
-            this.randomHandler = function (e) { that.random(e); };
+            this.randomHandler = function (e) { that.random(-1); };
             Util.registerClick("btnGo", that.goHandler);
             Util.registerClick("btnRandom", this.randomHandler);
+
+            var that = this;
+            Util.registerEvent(window, "unload", function (e) { that.dispose });
         }
 
-        private random(e: any) {
-            var n = Math.floor(Math.random() * this.randomList.length);
+        private random(ignore: number) {
+
+            if (this.randomList.length == 1) {
+                Util.setValue("txtInput", this.randomList[0]);
+                return;
+            }
+
+            var n = ignore;
+            while (n == ignore) {
+                n = Util.random(this.randomList.length);
+            }
             Util.setValue("txtInput", this.randomList[n]);
         }
 
@@ -325,4 +358,16 @@ namespace Veda.Chanting {
     }
 }
 
-new Veda.Chanting.Worker();
+var _samples: string[] =
+    [
+        "శ్రీ రామ రామ రామేతి రమే రామే మనోరమే సహస్ర నామ తత్ తుల్యం రామ నామ వరాననే",
+        "శ్రీ హేవళంబి నామ నూతన సంవత్సర శుభ అభినందనం",
+        "ī̱śā vā̱sya̍m i̱daṁ sarva̱ṃ yat kiñca jaga̍tyā̱ṃ jaga̍t",
+        "ईशा वास्यं इदं सर्वं यत्किंच जगत्यां जगत्",
+        "ఈశా వశ్యం ఇదం సర్వం  యత్ జగత్యం జగత్",
+        "ఏతా అసతన్ సుకృతస్య లోకే త విష్ణో పాహి పాహి యజ్ఞం పాహి యజ్ఞపతిం పాహి మాం యజ్ఞనిజం",
+        "ētā asatan skṛtasya lōkē ta viṣṇō pāhi pāhi yajñaṁ pāhi yajñapatiṁ pāhi māṁ yajñanijaṁ"
+    ];
+var config: VedaConfig = { samples: _samples };
+
+new Veda.Chanting.Worker(config);

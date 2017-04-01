@@ -25,10 +25,9 @@ declare var Util: {
     createEndPoint(endpoint: string, params: any): string;
     postQuery(params: any, isGet: boolean): string;
     template(html: string, options: any): string;
-   
+    random(n: number): number;
 }
 
-declare var Server: {
-    customerId: string;
-    noteId: string;
+declare type VedaConfig = {
+    samples: string[];
 }

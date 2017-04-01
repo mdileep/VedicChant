@@ -190,9 +190,11 @@ Util.setValue = function (Id, D) {
     }
     document.getElementById(Id).value = D;
 }
-
+Util.random = function (n) {
+    return Math.floor(Math.random() * n);
+}
 Util.template = function (html, options) {
-    //Refer: http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line
+    //Original: http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line
     var re = /<%([^%>]+)?%>/g, reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g, code = 'var r=[];\n', cursor = 0, match;
     var add = function (line, js) {
         js ? (code += line.match(reExp) ? line + '\n' : 'r.push(' + line + ');\n') :

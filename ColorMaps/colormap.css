@@ -1,0 +1,108 @@
+﻿.style_1, .style_2, .style_3,
+.style_4, .style_5, .style_6,
+.style_7, .style_8, .style_9,
+.missing, .clear, .seperator,
+.first {
+    display: block;
+    width: 16px;
+    height: 16px;
+    float: left;
+    border: 1px solid white;
+    color: black;
+    text-align: center;
+    font-weight: bold;
+}
+
+.style_1 {
+    background-color: aqua;
+}
+
+.style_2 {
+    background-color: bisque;
+}
+
+.style_3 {
+    background-color: blue;
+}
+
+.style_4 {
+    background-color: blueviolet;
+}
+
+.style_5 {
+    background-color: brown;
+}
+
+.style_6 {
+    background-color: chartreuse;
+}
+
+.style_7 {
+    background-color: darkmagenta;
+}
+
+.style_8 {
+    background-color: deeppink;
+}
+
+.style_9 {
+    background-color: sandybrown;
+}
+
+.missing {
+    background-color: black;
+    color: white;
+}
+
+.clear {
+    clear: both;
+}
+
+.seperator {
+    color: white;
+}
+
+.ol {
+    list-style: none;
+    background-color: white;
+    max-width: 1800px;
+    width: 1396px;
+}
+
+p {
+    width: 100%;
+    display: block;
+}
+
+h2 {
+    display: block;
+    clear: both;
+}
+
+.right {
+    text-align: right;
+    width: 100%;
+    clear: both;
+}
+
+.content {
+    text-overflow: ellipsis;
+    margin-left: 10%;
+    color: blue;
+}
+
+    .content span {
+        font-size: small;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+.blank {
+    height: 20px;
+}
+
+.force {
+    clear: none !important;
+    width: 16px;
+    height: 16px;
+}

@@ -40,12 +40,12 @@ var Veda;
             };
             PatternUtil.Get = function (words, I) {
                 if (I < 0) {
-                    return "";
+                    return PatternUtil.Missing;
                 }
                 if (I < words.length) {
                     return words[I];
                 }
-                return "";
+                return PatternUtil.Missing;
             };
             PatternUtil.Filter = function (words) {
                 var _words = [];
@@ -57,6 +57,7 @@ var Veda;
                 }
                 return _words;
             };
+            PatternUtil.Missing = "_";
             PatternUtil.Space = " ";
             PatternUtil.Seperator = " ~ ";
             PatternUtil.NewLine = "\n";
@@ -103,8 +104,8 @@ var Veda;
                 }
                 for (var I = 0; I <= N - 1; I++) {
                     //I+1 I+2 / I+2 I+1 / I+1 I+2  : One Index
-                    sb = sb + (PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Space +
-                        PatternUtil.Get(words, I + 1) + PatternUtil.Space + PatternUtil.Get(words, I) + PatternUtil.Space +
+                    sb = sb + (PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Seperator +
+                        PatternUtil.Get(words, I + 1) + PatternUtil.Space + PatternUtil.Get(words, I) + PatternUtil.Seperator +
                         PatternUtil.Get(words, I) + PatternUtil.Space + PatternUtil.Get(words, I + 1) + PatternUtil.Seperator);
                     sb = sb + (PatternUtil.NewLine);
                 }
@@ -276,15 +277,33 @@ var Veda;
         }());
         Chanting.Ghana = Ghana;
         var Worker = (function () {
-            function Worker() {
-                this.registerEvents();
-                this.list = [new Jata(), new Mala(), new Sikha(), new Rekha(), new Dhvaja(), new Dhanda(), new Ratha(), new Ghana()];
-                this.randomList = ["శ్రీ రామ రామ రామేతి రమే రామే మనోరమే సహస్ర నామ తత్ తుల్యం రామ నామ వరాననే", "శ్రీ హేవళంబి నామ నూతన సంవత్సర శుభ అభినందనం", "ī̱śā vā̱sya̍m i̱daṁ sarva̱ṃ yat kiñca jaga̍tyā̱ṃ jaga̍t", "ईशा वास्यं इदं सर्वं यत्किंच जगत्यां जगत्", "ఈశా వశ్యం ఇదం సర్వం  యత్ జగత్యం జగత్"];
-                var that = this;
-                Util.registerEvent(window, "unload", function (e) { that.dispose; });
-                this.random(null);
-                this.go(null);
+            function Worker(config) {
+                this.numbers = "1 2 3 4 5 6 7 8 9";
+                debugger;
+                this.init(config);
             }
+            Worker.prototype.init = function (config) {
+                this.list = [new Jata(), new Mala(), new Sikha(), new Rekha(), new Dhvaja(), new Dhanda(), new Ratha(), new Ghana()];
+                this.randomList = [];
+                this.randomList.push(this.numbers);
+                if (config != null) {
+                    this.loadSamples(config.samples);
+                }
+                this.random(0); // Don't show "1 2.." on Load
+                this.go(null);
+                this.registerEvents();
+            };
+            Worker.prototype.loadSamples = function (samples) {
+                if (samples == null) {
+                    return;
+                }
+                for (var index in samples) {
+                    if (samples[index] == null || samples[index].length == 0) {
+                        continue;
+                    }
+                    this.randomList.push(samples[index]);
+                }
+            };
             Worker.prototype.dispose = function () {
                 this.deRegisterEvents();
                 this.list = null;
@@ -297,12 +316,21 @@ var Veda;
             Worker.prototype.registerEvents = function () {
                 var that = this;
                 this.goHandler = function (e) { that.go(e); };
-                this.randomHandler = function (e) { that.random(e); };
+                this.randomHandler = function (e) { that.random(-1); };
                 Util.registerClick("btnGo", that.goHandler);
                 Util.registerClick("btnRandom", this.randomHandler);
+                var that = this;
+                Util.registerEvent(window, "unload", function (e) { that.dispose; });
             };
-            Worker.prototype.random = function (e) {
-                var n = Math.floor(Math.random() * this.randomList.length);
+            Worker.prototype.random = function (ignore) {
+                if (this.randomList.length == 1) {
+                    Util.setValue("txtInput", this.randomList[0]);
+                    return;
+                }
+                var n = ignore;
+                while (n == ignore) {
+                    n = Util.random(this.randomList.length);
+                }
                 Util.setValue("txtInput", this.randomList[n]);
             };
             Worker.prototype.go = function (e) {
@@ -336,4 +364,14 @@ var Veda;
         Chanting.Worker = Worker;
     })(Chanting = Veda.Chanting || (Veda.Chanting = {}));
 })(Veda || (Veda = {}));
-new Veda.Chanting.Worker();
+var _samples = [
+    "శ్రీ రామ రామ రామేతి రమే రామే మనోరమే సహస్ర నామ తత్ తుల్యం రామ నామ వరాననే",
+    "శ్రీ హేవళంబి నామ నూతన సంవత్సర శుభ అభినందనం",
+    "ī̱śā vā̱sya̍m i̱daṁ sarva̱ṃ yat kiñca jaga̍tyā̱ṃ jaga̍t",
+    "ईशा वास्यं इदं सर्वं यत्किंच जगत्यां जगत्",
+    "ఈశా వశ్యం ఇదం సర్వం  యత్ జగత్యం జగత్",
+    "ఏతా అసతన్ సుకృతస్య లోకే త విష్ణో పాహి పాహి యజ్ఞం పాహి యజ్ఞపతిం పాహి మాం యజ్ఞనిజం",
+    "ētā asatan skṛtasya lōkē ta viṣṇō pāhi pāhi yajñaṁ pāhi yajñapatiṁ pāhi māṁ yajñanijaṁ"
+];
+var config = { samples: _samples };
+new Veda.Chanting.Worker(config);
