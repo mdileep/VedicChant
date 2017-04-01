@@ -8,6 +8,9 @@
     height: 16px;
     float: left;
     border: 1px solid white;
+    color: black;
+    text-align: center;
+    font-weight: bold;
 }
 
 .style_1 {
@@ -48,6 +51,7 @@
 
 .missing {
     background-color: black;
+    color: white;
 }
 
 .clear {
@@ -55,26 +59,26 @@
 }
 
 .seperator {
-   
+    color: white;
 }
 
 .ol {
     list-style: none;
     background-color: white;
-    width: 1800px;
-    overflow-x: auto;
+    max-width: 1800px;
+    width: 1396px;
 }
 
 p {
     width: 100%;
     display: block;
-    overflow: auto;
 }
 
 h2 {
     display: block;
     clear: both;
 }
+
 .right {
     text-align: right;
     width: 100%;
@@ -92,3 +96,13 @@ h2 {
         font-weight: bold;
         font-style: italic;
     }
+
+.blank {
+    height: 20px;
+}
+
+.force {
+    clear: none !important;
+    width: 16px;
+    height: 16px;
+}
