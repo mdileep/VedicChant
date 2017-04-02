@@ -9,6 +9,10 @@
 -- http://www.astrojyoti.com/yajurvedamp3.htm
 ## Release Notes
 
+### Version 0.75 Beta : 01-Apr-2017 11:19 PM EST
+#### Bug Fixes
+- Minor Color map bug fix
+
 ### Version 0.75 Beta : 31-Mar-2017 11:00 PM EST
 #### Features
 - Added values to the Source colors legend.
