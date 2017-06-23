@@ -12,13 +12,17 @@
 
 td, th {
     padding: 4px;
-    vertical-align: top;
+    vertical-align: middle;
 }
 
 .table, .grid {
     border-collapse: collapse;
     border: 0px solid #111111;
     width: 98%;
+}
+
+.grid {
+    height: 80%;
 }
 
 .blank {
@@ -38,7 +42,7 @@ input[type=text], button {
 
 button {
     width: 32px;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
 }
 
 input[type=text], textarea, select {
@@ -56,9 +60,14 @@ input[type=text], textarea, select {
     list-style: none;
 }
 
-    .ol li p {
+.old {
+    list-style: decimal;
+}
+
+    .ol li p, .old li p {
         border: 1px solid #EEEEEE;
         padding: 4px;
+        word-wrap: break-word;
     }
 
 .right {
