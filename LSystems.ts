@@ -186,7 +186,7 @@ namespace LSystems {
         private removeHandler(e: any) {
             debugger;
             var rules = document.getElementById("rules");
-            var rows = document.getElementById("rules").getElementsByTagName("tr").length;
+            var rows = rules.getElementsByTagName("tr").length;
             if (rows <= 2) {
                 return;
             }
