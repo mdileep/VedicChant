@@ -63,8 +63,7 @@ namespace LSystems {
                     matched = true;
                 }
             }
-            if (!matched)
-            {
+            if (!matched) {
                 return c;
             }
             return retVal;
@@ -81,14 +80,12 @@ namespace LSystems {
             return retVal;
         }
 
-
-        public static Generate(axiom: string, rules: iRule[], max: number): string[] {
-
+        public static Generate(config: Config): string[] {
             var retVals: string[] = [];
-            var current: string = axiom;
+            var current: string = config.axiom;
             retVals.push(current);
-            for (var i: number = 0; i < max; i++) {
-                current = LSystemsUtil.Process(current, rules)
+            for (var i: number = 0; i < config.max; i++) {
+                current = LSystemsUtil.Process(current, config.rules)
                 retVals.push(current);
             }
 
@@ -100,7 +97,6 @@ namespace LSystems {
 
         list: iRule[];
         goHandler: elementEventListener;
-
 
         constructor(config: Config) {
             debugger;
@@ -122,8 +118,6 @@ namespace LSystems {
             Util.setValue("txtMax", config.max.toString());
             Util.setValue("txtAxiom", config.axiom);
             this.loadRules(config.rules);
-
-
         }
 
         private loadRules(rules: iRule[]): void {
@@ -155,7 +149,6 @@ namespace LSystems {
         private dispose() {
             this.deRegisterEvents();
             this.list = null;
-
         }
 
         private deRegisterEvents() {
@@ -180,7 +173,6 @@ namespace LSystems {
             var rows = document.getElementById("rules").getElementsByTagName("tr").length;
             var html = Util.template('<tr> <td style="width:64px;"> Rule #<b><% this.id %></b> :</td><td><input type="text" name="txtRule<% this.id %>" id="txtRule<% this.id %>" value="" /> </td></tr>', { id: rows + 1 });
             Util.insertAdjacentHTML("rules", html);
-
         }
 
         private removeHandler(e: any) {
@@ -202,7 +194,7 @@ namespace LSystems {
 
             var rules: iRule[] = this.getRules();
 
-            var vals = LSystemsUtil.Generate(axiom, rules, max);
+            var vals = LSystemsUtil.Generate({ axiom: axiom, rules: rules, max: max });
 
             var html = Util.template("<ol class='old'><%for(var index in this) {%> <li>  <p> <% this[index] %> </p> </li> <% } %></ol>", vals);
 
@@ -213,11 +205,8 @@ namespace LSystems {
         }
 
         private getRules(): iRule[] {
-
             var rules: iRule[] = [];
-
             var rows = document.getElementById("rules").getElementsByTagName("tr").length;
-
             for (var i = 1; i <= rows + 1; i++) {
                 var val: string = Util.getValue("txtRule" + i);
 
@@ -225,9 +214,7 @@ namespace LSystems {
                     var rule: iRule = Rule.GetRule(val);
                     rules.push(rule);
                 }
-
             }
-
             return rules;
         }
     }

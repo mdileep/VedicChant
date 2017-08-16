@@ -28,9 +28,3 @@ declare var Util: {
     template(html: string, options: any): string;
     random(n: number): number;
 }
-
-//Folowing may be moved to another file.
-declare type VedaConfig = {
-    samples: string[];
-}
-

@@ -1,0 +1,96 @@
+﻿.content {
+    text-overflow: ellipsis;
+    margin-left: 10%;
+    color: blue;
+}
+
+    .content span {
+        font-size: small;
+        font-weight: bold;
+        font-style: italic;
+    }
+
+td, th {
+    padding: 4px;
+    vertical-align: top;
+}
+
+.table, .grid {
+    border-collapse: collapse;
+    border: 0px solid #111111;
+    width: 98%;
+    text-align:center;
+}
+
+.blank {
+    height: 20px;
+}
+
+fieldset {
+    width: 90%;
+    margin: 10px;
+    padding: 10px;
+    border-color: #EEEEEE;
+}
+
+input[type=text], button {
+    height: 32px;
+}
+
+button {
+    width: 32px;
+    text-overflow: ellipsis;
+}
+
+input[type=text], textarea, select {
+    width: 100%;
+    margin: 2px;
+    border: 0px solid #dddddd;
+    border-bottom: 1px solid #dddddd;
+    color: blue;
+    font-style: italic;
+    text-overflow: ellipsis;
+}
+
+.ol {
+    list-style: none;
+}
+
+    .ol li p {
+        border: 1px solid #EEEEEE;
+        padding: 4px;
+    }
+
+.right {
+    text-align: right;
+    width: 100%;
+}
+
+.svg {
+    fill: rgb(255,255,0);
+    stroke-width: 2;
+    fill-opacity: 0.4;
+    stroke: rgb(0,0,0);
+    border: 2px solid #DDD;
+}
+
+.path {
+    stroke: #F60;
+    stroke-width: 4;
+}
+
+.circle {
+    stroke-linecap: round;
+}
+
+.first {
+    stroke-linecap: square;
+    stroke-width: 4;
+    stroke: red;
+}
+
+.ploygon {
+    fill: none;
+    stroke: green;
+    stroke-width: 1;
+}

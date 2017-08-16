@@ -54,12 +54,12 @@ var LSystems;
             }
             return retVal;
         };
-        LSystemsUtil.Generate = function (axiom, rules, max) {
+        LSystemsUtil.Generate = function (config) {
             var retVals = [];
-            var current = axiom;
+            var current = config.axiom;
             retVals.push(current);
-            for (var i = 0; i < max; i++) {
-                current = LSystemsUtil.Process(current, rules);
+            for (var i = 0; i < config.max; i++) {
+                current = LSystemsUtil.Process(current, config.rules);
                 retVals.push(current);
             }
             return retVals;
@@ -143,7 +143,7 @@ var LSystems;
             var _max = Util.getValue("txtMax");
             var max = parseInt(_max) == NaN ? 4 : parseInt(_max);
             var rules = this.getRules();
-            var vals = LSystemsUtil.Generate(axiom, rules, max);
+            var vals = LSystemsUtil.Generate({ axiom: axiom, rules: rules, max: max });
             var html = Util.template("<ol class='old'><%for(var index in this) {%> <li>  <p> <% this[index] %> </p> </li> <% } %></ol>", vals);
             var table = document.getElementById("table");
             if (table == null) {
@@ -174,4 +174,3 @@ var _rules = [
 ];
 var config = { axiom: "I", rules: _rules, max: 4 };
 new LSystems.Worker(config);
-//# sourceMappingURL=LSystems.js.map

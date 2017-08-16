@@ -375,4 +375,3 @@ var _samples = [
 ];
 var _config = { samples: _samples };
 new Veda.Chanting.Worker(_config);
-//# sourceMappingURL=Veda.js.map
