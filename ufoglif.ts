@@ -203,7 +203,7 @@
                             .replace(new RegExp("_y", 'g'), P0._y.toString());
                         s = s + temp;
                     }
-                    if (groupType == "qcurve") {
+                    if (groupType == "qcurve" || groupType == "curve") {
                         if (QCurve) {
                             var temp: string = "_x _y \r\n";
                             temp = temp.replace(new RegExp("_x", 'g'), P0._x.toString())
@@ -263,7 +263,7 @@
                                     .replace(new RegExp("_y", 'g'), P._y.toString());
                                 s = s + temp;
                             }
-                            else if (groupType == "qcurve") {
+                            else if (groupType == "qcurve" || groupType == "curve") {
                                 if (QCurve) {
                                     var temp: string = "_x _y \r\n";
                                     temp = temp.replace(new RegExp("_x", 'g'), P._x.toString())
