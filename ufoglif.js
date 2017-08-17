@@ -143,6 +143,12 @@ var UFOGlyf;
             var s = "";
             var first = true;
             var QCurve = false;
+            if (Groups.length > 0 && Groups[0].point.length > 0) {
+                if (typeof Groups[0].point[0] == "string") {
+                    //TODO:???
+                    return "";
+                }
+            }
             for (var index in Groups) {
                 var C = Groups[index];
                 if (C.point.length == 0) {
@@ -283,6 +289,13 @@ var UFOGlyf;
             return s;
         };
         Convert.PolygonContourPoints = function (contour) {
+            if (contour == null && contour.point == null) {
+                return "";
+            }
+            if (contour.point[0] == null) {
+                //TODO...
+                return "";
+            }
             var s = "";
             for (var index in contour.point) {
                 var point_ = contour.point[index];
@@ -307,6 +320,13 @@ var UFOGlyf;
             return s;
         };
         Convert.ListContourPoints = function (contour) {
+            if (contour == null && contour.point == null) {
+                return "";
+            }
+            if (contour.point[0] == null) {
+                //TODO...
+                return "";
+            }
             var s = "";
             var first = true;
             for (var index in contour.point) {
@@ -368,6 +388,10 @@ var UFOGlyf;
                 _x: 0,
                 _y: 0
             };
+            if (contour.point[0] == null) {
+                //TODO...
+                return M;
+            }
             for (var index in contour.point) {
                 var P = contour.point[index];
                 P._x = parseFloat(P._x.toString());
@@ -386,6 +410,10 @@ var UFOGlyf;
                 _x: 0,
                 _y: 0
             };
+            if (contour.point[0] == null) {
+                //TODO...
+                return M;
+            }
             for (var index in contour.point) {
                 var P = contour.point[index];
                 P._x = parseFloat(P._x.toString());

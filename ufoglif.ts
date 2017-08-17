@@ -171,6 +171,14 @@
             var s: string = "";
             var first: boolean = true;
             var QCurve: boolean = false;
+
+            if (Groups.length > 0 && Groups[0].point.length > 0) {
+                if (typeof Groups[0].point[0] == "string") {
+                    //TODO:???
+                    return "";
+                }
+            }
+
             for (var index in Groups) {
                 var C: contour = Groups[index];
                 if (C.point.length == 0) {
@@ -179,6 +187,7 @@
                 var groupType: string = C.point[0]._type;
                 var smooth: string = C.point[0]._smooth;
                 var P0: point = C.point[0];
+
                 if (first) {
 
                     var temp: string = "M_x _y \r\n";
@@ -318,6 +327,17 @@
         }
 
         static PolygonContourPoints(contour: contour): string {
+
+            if (contour == null && contour.point == null) {
+                return "";
+            }
+            if (contour.point[0] == null) {
+                //TODO...
+                return "";
+            }
+
+
+
             var s: string = "";
             for (var index in contour.point) {
                 var point_: point = contour.point[index];
@@ -344,6 +364,17 @@
         }
 
         static ListContourPoints(contour: contour): string {
+
+            if (contour == null && contour.point == null) {
+                return "";
+            }
+
+            if (contour.point[0] == null) {
+                //TODO...
+                return "";
+            }
+
+
             var s: string = "";
             var first: boolean = true;
             for (var index in contour.point) {
@@ -420,7 +451,10 @@
                     _y: 0
                 };
 
-
+            if (contour.point[0] == null) {
+                //TODO...
+                return M;
+            }
             for (var index in contour.point) {
                 var P: point = contour.point[index];
 
@@ -446,6 +480,10 @@
                     _y: 0
                 };
 
+            if (contour.point[0] == null) {
+                //TODO...
+                return M;
+            }
 
             for (var index in contour.point) {
                 var P: point = contour.point[index];
