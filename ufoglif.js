@@ -3,19 +3,18 @@ var UFOGlyf;
     var SVGUtil = (function () {
         function SVGUtil() {
         }
-        SVGUtil.Run = function (orig) {
-            var distancePerPoint = 2;
-            var drawFPS = 60 * 4;
+        SVGUtil.Run = function (orig, options) {
+            var distancePerPoint = 1;
+            var drawFPS = 60 * options.speed;
             var timer;
             var length = 0;
             var pathLength = orig.getTotalLength();
-            var repeat = true;
             timer = setInterval(function () {
                 length += distancePerPoint;
                 orig.style.strokeDasharray = [length, pathLength].join(' ');
                 if (length >= pathLength) {
                     length = 0;
-                    if (!repeat) {
+                    if (!options.loopAnimation) {
                         clearInterval(timer);
                     }
                 }
@@ -27,7 +26,7 @@ var UFOGlyf;
     var Convert = (function () {
         function Convert() {
         }
-        Convert.BuildSVG = function (glyph) {
+        Convert.BuildSVG = function (glyph, options) {
             var svg = "";
             var path = "";
             var points = "";
@@ -50,13 +49,17 @@ var UFOGlyf;
                     var contour = outline.contour[index];
                     path = path + Convert.ToContourPath(contour);
                 }
-                for (var index in outline.contour) {
-                    var contour = outline.contour[index];
-                    points = points + Convert.ListContourPoints(contour);
+                if (options.showPoints) {
+                    for (var index in outline.contour) {
+                        var contour = outline.contour[index];
+                        points = points + Convert.ListContourPoints(contour);
+                    }
                 }
-                for (var index in outline.contour) {
-                    var contour = outline.contour[index];
-                    polygon = polygon + Convert.PolygonContourPoints(contour);
+                if (options.showPolygon) {
+                    for (var index in outline.contour) {
+                        var contour = outline.contour[index];
+                        polygon = polygon + Convert.PolygonContourPoints(contour);
+                    }
                 }
                 MaxP = Convert.MaxPoint(outline);
                 MinP = Convert.MinPoint(outline);
@@ -433,16 +436,21 @@ var UFOGlyf;
         };
         Worker.prototype.go = function (e) {
             var input = Util.getValue("txtInput");
+            var showPoints = Util.isChecked("chkShowPoints");
+            var showPolygon = Util.isChecked("chkShowPolygon");
+            var loopAnimation = Util.isChecked("chkLoop");
+            var speed = parseInt(Util.selectedValue("drpSpeed"));
             var root = new X2JS().xml_str2json(input);
             var glyph = root.glyph;
-            var html = Convert.BuildSVG(glyph);
+            var options = { showPoints: showPoints, showPolygon: showPolygon, loopAnimation: loopAnimation, speed: speed };
+            var html = Convert.BuildSVG(glyph, options);
             var table = document.getElementById("table");
             if (table == null) {
                 return;
             }
             table.innerHTML = "";
             table.innerHTML = html;
-            SVGUtil.Run(table.querySelector("path"));
+            SVGUtil.Run(table.querySelector("path"), options);
         };
         Worker.prototype.registerEvents = function () {
             var that = this;

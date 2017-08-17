@@ -15,16 +15,27 @@
 
     <table border="0" class="table">
         <tr>
-            <td style="width:32px;"><button type="button" id="btnRandom" title="Random">~</button></td>
-            <td>
+            <td colspan="8">
                 <textarea rows="5" type="text" id="txtInput"></textarea>
-            </td>
-            <td style="width:32px;">
-                <button type="button" id="btnGo" title="Go">Go</button>
             </td>
         </tr>
         <tr>
-            <td colspan="2"><label><a target="_blank" href="https://github.com/LettError/MutatorMath/tree/master/Lib/mutatorMath/test/ufo/data/sources/light/LightWide.ufo/glyphs">Sample Glif Files</a></label></td>
+            <td style="width:32px;"><button type="button" id="btnRandom" title="Random">~</button></td>
+            <td>
+                <label for="chkShowPoints">Show Points</label><input type="checkbox" checked="checked" id="chkShowPoints" />
+            </td>
+            <td>
+                <label for="chkShowPolygon">Show Polygon</label><input type="checkbox" id="chkShowPolygon" />
+            </td>
+            <td>
+                <label for="chkLoop">Loop Animation</label><input type="checkbox" checked="checked" id="chkLoop" />
+            </td>
+            <td><label for="selSpeed">Speed</label> </td>
+            <td><select id="drpSpeed"><option value="1">0.25x</option><option value="2">0.5x</option><option selected="selected" value="4">1x</option><option value="8">2x</option><option value="16">4x</option><option value="32">8x</option><option value="64">16x</option></select></td>
+            <td style="width:32px;">
+                <button type="button" id="btnGo" title="Go">Go</button>
+            </td>
+            <td><label><a target="_blank" href="https://github.com/LettError/MutatorMath/tree/master/Lib/mutatorMath/test/ufo/data/sources/light/LightWide.ufo/glyphs">Sample Glif Files</a></label></td>
         </tr>
     </table>
 

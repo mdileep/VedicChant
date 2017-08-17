@@ -1,7 +1,12 @@
 ﻿declare type AppConfig = {
     samples: string[];
 }
-
+declare type SVGOptions = {
+    showPoints: boolean;
+    showPolygon: boolean;
+    loopAnimation: boolean;
+    speed: number;
+};
 declare type point = {
     _x: number;
     _y: number;

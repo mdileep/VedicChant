@@ -1,20 +1,19 @@
 ﻿namespace UFOGlyf {
     export class SVGUtil {
-        static Run(orig: SVGPathElement) {
+        static Run(orig: SVGPathElement, options: SVGOptions) {
 
-            var distancePerPoint: number =2;
-            var drawFPS: number = 60 * 4;
+            var distancePerPoint: number = 1;
+            var drawFPS: number = 60 * options.speed;
             var timer: number;
             var length: number = 0;
             var pathLength = orig.getTotalLength();
-            var repeat = true;
 
             timer = setInterval(function () {
                 length += distancePerPoint;
                 orig.style.strokeDasharray = [length, pathLength].join(' ');
                 if (length >= pathLength) {
                     length = 0;
-                    if (!repeat) { clearInterval(timer); }
+                    if (!options.loopAnimation) { clearInterval(timer); }
                 }
             }
                 , 1000 / drawFPS);
@@ -22,9 +21,7 @@
 
     }
     export class Convert {
-
-
-        static BuildSVG(glyph: glyph): string {
+        static BuildSVG(glyph: glyph, options: SVGOptions): string {
             var svg: string = "";
 
             var path: string = "";
@@ -55,20 +52,19 @@
                     path = path + Convert.ToContourPath(contour);
                 }
 
-
-                for (var index in outline.contour) {
-                    var contour = outline.contour[index];
-                    points = points + Convert.ListContourPoints(contour);
+                if (options.showPoints) {
+                    for (var index in outline.contour) {
+                        var contour = outline.contour[index];
+                        points = points + Convert.ListContourPoints(contour);
+                    }
                 }
 
-
-
-                for (var index in outline.contour) {
-                    var contour = outline.contour[index];
-                    polygon = polygon + Convert.PolygonContourPoints(contour);
+                if (options.showPolygon) {
+                    for (var index in outline.contour) {
+                        var contour = outline.contour[index];
+                        polygon = polygon + Convert.PolygonContourPoints(contour);
+                    }
                 }
-
-
 
                 MaxP = Convert.MaxPoint(outline);
                 MinP = Convert.MinPoint(outline);
@@ -520,15 +516,21 @@
 
         private go(e: any) {
             var input: string = Util.getValue("txtInput");
+            var showPoints: boolean = Util.isChecked("chkShowPoints");
+            var showPolygon: boolean = Util.isChecked("chkShowPolygon");
+            var loopAnimation: boolean = Util.isChecked("chkLoop");
+            var speed: number = parseInt(Util.selectedValue("drpSpeed"));
+
             var root: root = new X2JS().xml_str2json(input) as root;
             var glyph: glyph = root.glyph;
+            var options: SVGOptions = { showPoints: showPoints, showPolygon: showPolygon, loopAnimation: loopAnimation, speed: speed };
 
-            var html = Convert.BuildSVG(glyph);
+            var html = Convert.BuildSVG(glyph, options);
             var table = document.getElementById("table");
             if (table == null) { return; }
             table.innerHTML = "";
             table.innerHTML = html;
-            SVGUtil.Run(table.querySelector("path") as SVGPathElement);
+            SVGUtil.Run(table.querySelector("path") as SVGPathElement, options);
         }
 
         private registerEvents() {
