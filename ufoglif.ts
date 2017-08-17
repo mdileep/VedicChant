@@ -352,11 +352,11 @@
             var first: boolean = true;
             for (var index in contour.point) {
                 var point_: point = contour.point[index];
-                var temp: string = '<circle cx="_cx" cy="_cy" r="5"  type="_type" />';
+                var temp: string = '<circle cx="_cx" cy="_cy" r="5"  type="_type" _class />';
                 temp = temp.replace(new RegExp("_cx", 'g'), point_._x.toString())
                     .replace(new RegExp("_cy", 'g'), point_._y.toString())
                     .replace(new RegExp("_type", 'g'), point_._type == null ? "" : point_._type)
-                    .replace(new RegExp("_class", 'g'), first ? " first" : "")
+                    .replace(new RegExp("_class", 'g'), first ? 'class="first"' : "")
 
                 s = s + temp;
                 s = s + "\r\n";
