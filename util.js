@@ -190,6 +190,14 @@ Util.setValue = function (Id, D) {
     }
     document.getElementById(Id).value = D;
 }
+
+Util.insertAdjacentHTML = function (Id, D) {
+    if (document.getElementById(Id) == null) {
+        return;
+    }
+    document.getElementById(Id).insertAdjacentHTML('beforeend', D);
+}
+
 Util.random = function (n) {
     return Math.floor(Math.random() * n);
 }

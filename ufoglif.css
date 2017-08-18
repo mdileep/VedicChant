@@ -12,17 +12,14 @@
 
 td, th {
     padding: 4px;
-    vertical-align: middle;
+    vertical-align: top;
 }
 
 .table, .grid {
     border-collapse: collapse;
     border: 0px solid #111111;
     width: 98%;
-}
-
-.grid {
-    height: 80%;
+    text-align:center;
 }
 
 .blank {
@@ -50,7 +47,6 @@ input[type=text], textarea, select {
     margin: 2px;
     border: 0px solid #dddddd;
     border-bottom: 1px solid #dddddd;
-    overflow: hidden;
     color: blue;
     font-style: italic;
     text-overflow: ellipsis;
@@ -60,17 +56,41 @@ input[type=text], textarea, select {
     list-style: none;
 }
 
-.old {
-    list-style: decimal;
-}
-
-    .ol li p, .old li p {
+    .ol li p {
         border: 1px solid #EEEEEE;
         padding: 4px;
-        word-wrap: break-word;
     }
 
 .right {
     text-align: right;
     width: 100%;
+}
+
+.svg {
+    fill: rgb(255,255,0);
+    stroke-width: 2;
+    fill-opacity: 0.4;
+    stroke: rgb(0,0,0);
+    border: 2px solid #DDD;
+}
+
+.path {
+    stroke: #F60;
+    stroke-width: 4;
+}
+
+.circle {
+    stroke-linecap: round;
+}
+
+.first {
+    stroke-linecap: square;
+    stroke-width: 4;
+    stroke: red;
+}
+
+.ploygon {
+    fill: none;
+    stroke: green;
+    stroke-width: 1;
 }

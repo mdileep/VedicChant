@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Visualize UFO Font Glyph Tool (Beta)</title>
+    <meta id="keywords" name="keywords" content="Visualize UFO Font Glyph Tool " />
+    <meta id="description" name="description" content="Visualize UFO Font Glyph Tool " />
+    <meta name="author" content="Dileep Miriyala(దిలీపు మిరియాల)" />
+    <link rel="shortcut icon" href="/Miriyam.ico" />
+    <link href="ufoglif.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="xml2json.min.js"></script>
+    <script type="text/javascript" src="util.js"></script>
+</head>
+<body>
+    <h2>Visualize UFO Font Glyph Tool (Beta)</h2>
+
+    <table border="0" class="table">
+        <tr>
+            <td colspan="8">
+                <textarea rows="5" type="text" id="txtInput"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <td style="width:32px;"><button type="button" id="btnRandom" title="Random">~</button></td>
+            <td>
+                <label for="chkShowPoints">Show Points</label><input type="checkbox" checked="checked" id="chkShowPoints" />
+            </td>
+            <td>
+                <label for="chkShowPolygon">Show Polygon</label><input type="checkbox" id="chkShowPolygon" />
+            </td>
+            <td>
+                <label for="chkLoop">Loop Animation</label><input type="checkbox" checked="checked" id="chkLoop" />
+            </td>
+            <td><label for="selSpeed">Speed</label> </td>
+            <td><select id="drpSpeed"><option value="1">0.25x</option><option value="2">0.5x</option><option selected="selected" value="4">1x</option><option value="8">2x</option><option value="16">4x</option><option value="32">8x</option><option value="64">16x</option></select></td>
+            <td>&nbsp;</td>
+            <td style="width:32px;">
+                <button type="button" id="btnGo" title="Go">Go</button>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align:left" colspan="4">
+                <h3>Samples  Glif</h3>
+                <ul>
+                    <li><a target="_blank" href="https://github.com/LettError/MutatorMath/tree/master/Lib/mutatorMath/test/ufo/data/sources/light/LightWide.ufo/glyphs">Lite Wide </a></li>
+                    <li><a target="_blank" href="https://github.com/appajid/ramaraja/tree/master/Ramaraja-Regular.ufo/glyphs">RamaRaja</a></li>
+                    <li><a target="_blank" href="https://github.com/appajid/mallanna/tree/master/Mallanna.ufo/glyphs">Mallana</a></li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
+    <div class="blank"></div>
+    <div id="table" border="1" class="table"></div>
+    <script type="text/javascript" src="ufoglif.js"></script>
+
+    <div class="right"><span class="content">~ Dileep Miriyala(దిలీపు మిరియాల)</span></div>
+</body>
+</html>

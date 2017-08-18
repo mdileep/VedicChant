@@ -22,12 +22,9 @@ declare var Util: {
     selectedValue(id: string): string;
     isChecked(id: string): boolean;
     setValue(id: string, value: string): void;
+    insertAdjacentHTML(id: string, html: string): void;
     createEndPoint(endpoint: string, params: any): string;
     postQuery(params: any, isGet: boolean): string;
     template(html: string, options: any): string;
     random(n: number): number;
-}
-
-declare type VedaConfig = {
-    samples: string[];
 }

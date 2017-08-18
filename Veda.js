@@ -373,5 +373,5 @@ var _samples = [
     "ఏతా అసతన్ సుకృతస్య లోకే త విష్ణో పాహి పాహి యజ్ఞం పాహి యజ్ఞపతిం పాహి మాం యజ్ఞనిజం",
     "ētā asatan skṛtasya lōkē ta viṣṇō pāhi pāhi yajñaṁ pāhi yajñapatiṁ pāhi māṁ yajñanijaṁ"
 ];
-var config = { samples: _samples };
-new Veda.Chanting.Worker(config);
+var _config = { samples: _samples };
+new Veda.Chanting.Worker(_config);
