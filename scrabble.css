@@ -1,0 +1,45 @@
+﻿body {
+    font-family: Mallanna,RamaneeyaWin, "Noto Sans Telugu","Hind Guntur",Gautami,"Kohinoor Telugu",sans-serif;
+}
+
+h2 {
+    clear: both;
+}
+
+.block {
+    float: left;
+    width: 250px;
+    height: 460px;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+span, .span {
+    font-size: 32px;
+    color: red;
+    border: 1px dotted green;
+    display: block;
+    height: 36px;
+    width: auto;
+    min-width: 36px;
+    float: left;
+    text-align: center;
+    margin: 5px;
+}
+
+.trash {
+    color: gray;
+    font-style: italic;
+}
+
+td {
+    width: 32px;
+    height: 32px;
+    border: 1px solid gray;
+}
+
+table {
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
